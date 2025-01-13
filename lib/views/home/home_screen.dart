@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 55, width: 55), // Placeholder for symmetry
                     InkWell(
                       onTap: () {
-                        context.push(const TripRequestScreen());
+                        context.push(TripRequestScreen());
                       },
                       child: Stack(
                         alignment: Alignment.center,

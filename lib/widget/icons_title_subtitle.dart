@@ -1,5 +1,4 @@
 import 'package:farego/commen/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class IconsTitleSubtitle extends StatelessWidget {
