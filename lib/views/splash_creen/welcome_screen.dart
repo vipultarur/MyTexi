@@ -1,5 +1,4 @@
 import 'package:farego/commen/app_colors.dart';
-import 'package:farego/views/auth/number%20_verification.dart';
 import 'package:farego/views/auth/sign_in_screen.dart';
 import 'package:farego/views/auth/sign_up_screen.dart';
 import 'package:farego/widget/round_button.dart';

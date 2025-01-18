@@ -90,6 +90,8 @@ class _AddVechicleScreenState extends State<AddVechicleScreen> {
               ),
               const SizedBox(height: 20),
               BlackRoundButton(
+                color: Colors.white,
+                backgroundColor: Colors.black,
                 title: "REGISTER",
                 onPressed: () {
                   context.push(DocumentUploadScreen(title: 'Vehicle Document'));

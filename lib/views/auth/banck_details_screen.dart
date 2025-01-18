@@ -86,6 +86,8 @@ class _BanckDetailsScreenState extends State<BanckDetailsScreen> {
               ),
               const SizedBox(height: 20),
               BlackRoundButton(
+                color: Colors.white,
+                backgroundColor: Colors.black,
                 title: "NEXT",
                 onPressed: () {
                   context.push(DocumentUploadScreen(title: 'Personal Document'));

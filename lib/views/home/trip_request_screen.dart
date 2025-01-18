@@ -1,10 +1,10 @@
+import 'package:farego/views/home/run_ride_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:farego/commen/app_colors.dart';
 import 'package:farego/widget/gray_liable_box.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
-
 
 class TripRequestScreen extends StatefulWidget {
   const TripRequestScreen({super.key});
@@ -17,24 +17,19 @@ class _TripRequestScreenState extends State<TripRequestScreen>
     with OSMMixinObserver {
   late MapController controller;
 
-  final MapController mapController = MapController(
-    initPosition: GeoPoint(latitude: 24.173129263388724, longitude: 72.42048827959617),
-  );
-  // 24.173129263388724, 72.42048827959617 bus
-  // 24.172789740242393, 72.42886203673625 shraddha
   @override
   void initState() {
     super.initState();
     controller = MapController(
-        initPosition:
-            GeoPoint(latitude: 24.172789740242393, longitude: 72.42886203673625));
+      initPosition: GeoPoint(latitude: 24.1730, longitude: 72.4200),
+    );
     controller.addObserver(this);
   }
 
   @override
   void dispose() {
-    mapController.dispose();
     super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -52,38 +47,33 @@ class _TripRequestScreenState extends State<TripRequestScreen>
 
   Widget _buildMap() {
     return OSMFlutter(
-      controller: mapController,
+      controller: controller,
       osmOption: OSMOption(
         enableRotationByGesture: true,
-        userTrackingOption: UserTrackingOption(
-          enableTracking: true,
-          unFollowUser: false,
-        ),
         zoomOption: ZoomOption(
           initZoom: 8,
           minZoomLevel: 3,
           maxZoomLevel: 19,
           stepZoom: 1.0,
         ),
-        userLocationMarker: UserLocationMaker(
-          personMarker: MarkerIcon(
-            icon: const Icon(
-              Icons.location_history_rounded,
-              color: Colors.red,
-              size: 48,
-            ),
-          ),
-          directionArrowMarker: MarkerIcon(
-            icon: const Icon(
-              Icons.double_arrow,
-              size: 48,
-            ),
-          ),
-        ),
+
+        staticPoints: [],
         roadConfiguration: RoadOption(
           roadColor: Colors.yellowAccent,
         ),
+        showDefaultInfoWindow: false,
       ),
+      onMapIsReady: (isReady) {
+        if (isReady) {
+          print("map is redy");
+        }
+      },
+      onLocationChanged: (myLocation) {
+        print("user location:$myLocation");
+      },
+      onGeoPointClicked: (myLocation) {
+        print("GeoPointclicked location: $myLocation");
+      },
     );
   }
 
@@ -151,12 +141,7 @@ class _TripRequestScreenState extends State<TripRequestScreen>
                                       .ellipsis, // Handle text overflow
                                 ),
                                 onSwipe: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Swiped"),
-                                      backgroundColor: Colors.green,
-                                    ),
-                                  );
+                                  context.pop();
                                 },
                               ),
                             ),
@@ -181,12 +166,7 @@ class _TripRequestScreenState extends State<TripRequestScreen>
                                   ),
                                 ),
                                 onSwipe: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Swiped"),
-                                      backgroundColor: Colors.green,
-                                    ),
-                                  );
+                                    context.push(const RunRideScreen());
                                 },
                               ),
                             )
@@ -293,7 +273,8 @@ class _TripRequestScreenState extends State<TripRequestScreen>
   }
 
   Widget _buildGrayLiableRow() {
-    return Row(
+    return
+      Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: const [
         GrayLiableBox(
@@ -410,36 +391,39 @@ class _TripRequestScreenState extends State<TripRequestScreen>
   }
 
   void addMarker() async {
+    GeoPoint pickupPoint = GeoPoint(latitude: 24.1730, longitude: 72.4200);
+    GeoPoint dropoffPoint = GeoPoint(latitude: 24.1738, longitude: 72.4205);
+
+    await controller.setStaticPosition([pickupPoint], "pickup");
+    await controller.setStaticPosition([dropoffPoint], "dropoff");
+
     await controller.setMarkerOfStaticPoint(
       id: "pickup",
       markerIcon: MarkerIcon(
-        iconWidget: Icon(Icons.location_on, color: Colors.blueAccent),
+        iconWidget: Image.asset("assets/images/carlocation.png",width: 50,height: 50,),
       ),
     );
+
     await controller.setMarkerOfStaticPoint(
       id: "dropoff",
       markerIcon: MarkerIcon(
-        iconWidget: Image.asset(
-          "assets/images/location.png",
-          width: 80,
-          height: 80,
-        ),
+        iconWidget: Image.asset("assets/images/manlocation.png",width: 50,height: 50,),
       ),
     );
-    // 24.173129263388724, 24.173129263388724 bus
-    // 24.172789740242393, 72.42886203673625 shraddha
-    await controller.setStaticPosition(
-        [GeoPoint(latitude: 24.173129263388724, longitude: 24.173129263388724)],
-        "pickup");
-    await controller.setStaticPosition(
-        [GeoPoint(latitude: 24.172789740242393, longitude: 72.42886203673625)],
-        "dropoff");
 
+    await loadMapRoad(pickupPoint, dropoffPoint);
+  }
+
+  Future<void> loadMapRoad(GeoPoint start, GeoPoint end) async {
+    await controller.drawRoad(start, end,
+        roadType: RoadType.car,
+        roadOption:
+            const RoadOption(roadColor: AppColors.accentColor, roadBorderWidth: 10,roadWidth: 10,roadBorderColor: AppColors.accentColor));
   }
 
   @override
   Future<void> mapIsReady(bool isReady) async {
-    if(isReady){
+    if (isReady) {
       addMarker();
     }
   }

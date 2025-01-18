@@ -90,6 +90,8 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
 
               const SizedBox(height: 10),
               BlackRoundButton(
+                color: Colors.white,
+                backgroundColor: Colors.black,
                 title: "NEXT",
                 onPressed: () {
                   context.push(SubscriptionPlanScreen());

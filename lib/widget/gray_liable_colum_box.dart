@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
 
-class GrayLiableBox extends StatelessWidget {
-  final IconData icon;
+class GrayLiableColumBox extends StatelessWidget {
+  final Widget icon;
   final String title;
   final Color titlecolor;
-  final Color iconColor;
   final Color backgroundColor;
   final TextStyle? textStyle;
-
-  const GrayLiableBox({
+  final VoidCallback onPressed;
+  const GrayLiableColumBox({
     Key? key,
     required this.icon,
     required this.title,
-    this.iconColor = Colors.white,
     this.backgroundColor = Colors.black,
-    this.textStyle, this.titlecolor=Colors.black,
+    this.textStyle,
+    this.titlecolor = Colors.black, required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return
-      InkWell(
-        onTap: (){},
-        child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
+        child: Column(
           children: [
-            Icon(
-              icon,
-              color: iconColor,
-            ),
-            const SizedBox(width: 4),
+            IconButton(onPressed: onPressed, icon: icon),
+            const SizedBox(height: 4),
             Text(
               title,
               style: textStyle ??
@@ -46,7 +40,7 @@ class GrayLiableBox extends StatelessWidget {
             ),
           ],
         ),
-            ),
-      );
+      ),
+    );
   }
 }

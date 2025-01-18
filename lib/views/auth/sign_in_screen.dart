@@ -129,6 +129,8 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 20),
             BlackRoundButton(
+              color: Colors.white,
+              backgroundColor: Colors.black,
               title: "CONTINUE",
               onPressed: () {
                 // Add your continue button functionality

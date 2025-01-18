@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 
 class BlackRoundButton extends StatelessWidget {
   final String title;
+  final Color color;
+  final Color backgroundColor;
   final VoidCallback onPressed;
 
   const BlackRoundButton({
     super.key,
     required this.title,
     required this.onPressed,
+    this.color = Colors.white,
+    this.backgroundColor = Colors.black, // Default value provided
   });
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class BlackRoundButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed, // Use the passed onPressed callback here
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
+          backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -26,10 +31,10 @@ class BlackRoundButton extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: color,
             ),
           ),
         ),

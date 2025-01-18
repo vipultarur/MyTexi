@@ -103,6 +103,8 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             const SizedBox(height: 20,),
             BlackRoundButton(
+              color: Colors.white,
+              backgroundColor: Colors.black,
               title: "CONTINUE",
               onPressed: () {
                 context.push(SignInScreen());

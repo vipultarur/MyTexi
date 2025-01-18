@@ -133,6 +133,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 20),
               BlackRoundButton(
+                color: Colors.white,
+                backgroundColor: Colors.black,
                 title: "SIGN UP",
                 onPressed: () {
                   context.push(BanckDetailsScreen());
