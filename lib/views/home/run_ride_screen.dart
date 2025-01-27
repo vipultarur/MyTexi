@@ -4,7 +4,6 @@ import 'package:farego/views/home/trip_detail_screen.dart';
 import 'package:farego/widget/black_round_button.dart';
 import 'package:farego/widget/custom_text_field.dart';
 import 'package:farego/widget/gray_liable_colum_box.dart';
-import 'package:farego/widget/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:farego/commen/app_colors.dart';
@@ -41,7 +40,7 @@ class _RunRideScreenState extends State<RunRideScreen> with OSMMixinObserver {
   void _handleSwipeAction() async {
     switch (rideStatus) {
       case 0:
-        // Action for "Arrived"
+      // Action for "Arrived"
         rideStatus = 1;
         break;
       case 1:
@@ -49,7 +48,8 @@ class _RunRideScreenState extends State<RunRideScreen> with OSMMixinObserver {
         break;
       case 2:
         rideStatus = 3;
-        await showDialog(
+        await
+        showDialog(
           context: context,
           builder: (context) {
             return Dialog(
@@ -193,373 +193,223 @@ class _RunRideScreenState extends State<RunRideScreen> with OSMMixinObserver {
     );
   }
 
-  Widget _buildBottomDetails() {
-    if (!isComleteRide) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          if (rideStatus == 1)
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TimerCountdown(
-                    spacerWidth: 0,
-                    daysDescription: "",
-                    hoursDescription: "",
-                    minutesDescription: "",
-                    secondsDescription: "",
-                    format:
-                        CountDownTimerFormat.minutesSeconds, // Changed format
-                    enableDescriptions:
-                        false, // Disable descriptions since only minutes and seconds are shown
-                    timeTextStyle: const TextStyle(
-                        fontFeatures: <FontFeature>[
-                          FontFeature.tabularFigures(),
-                        ],
-                        fontSize: 20,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w800),
-                    colonsTextStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                    descriptionTextStyle: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                    endTime: DateTime.now().add(Duration(
-                        minutes: 4)), // Set your desired countdown time
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    "Waiting For Rider",
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
-          if (rideStatus == 2)
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TimerCountdown(
-                    spacerWidth: 0,
-                    daysDescription: "",
-                    hoursDescription: "",
-                    minutesDescription: "",
-                    secondsDescription: "",
-                    format:
-                        CountDownTimerFormat.minutesSeconds, // Changed format
-                    enableDescriptions:
-                        false, // Disable descriptions since only minutes and seconds are shown
-                    timeTextStyle: const TextStyle(
-                        fontFeatures: <FontFeature>[
-                          FontFeature.tabularFigures(),
-                        ],
-                        fontSize: 20,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w800),
-                    colonsTextStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                    descriptionTextStyle: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                    endTime: DateTime.now().add(Duration(
-                        minutes: 4)), // Set your desired countdown time
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    "Waiting for a ride",
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
-          if (rideStatus == 3)
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TimerCountdown(
-                    spacerWidth: 0,
-                    daysDescription: "",
-                    hoursDescription: "",
-                    minutesDescription: "",
-                    secondsDescription: "",
-                    format:
-                        CountDownTimerFormat.minutesSeconds, // Changed format
-                    enableDescriptions:
-                        false, // Disable descriptions since only minutes and seconds are shown
-                    timeTextStyle: const TextStyle(
-                        fontFeatures: <FontFeature>[
-                          FontFeature.tabularFigures(),
-                        ],
-                        fontSize: 20,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w800),
-                    colonsTextStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                    descriptionTextStyle: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                    endTime: DateTime.now().add(Duration(
-                        minutes: 4)), // Set your desired countdown time
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    "Arrived at drop off",
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                      offset: Offset(0, -2),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 30),
-                    _buildGrayLiableRow(),
-                    const SizedBox(height: 10),
-                    if (isOpen)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GrayLiableColumBox(
-                            onPressed: () {},
-                            icon: Icon(Icons.chat_bubble,
-                                color: Colors.green.shade600),
-                            title: "Chat",
-                            backgroundColor: Colors.green
-                                .shade100, // Light green for soft contrast
-                          ),
-                          GrayLiableColumBox(
-                            onPressed: () {},
-                            icon: Icon(Icons.chat_outlined,
-                                color: Colors.blue.shade700),
-                            title: "Message",
-                            backgroundColor: Colors.blue.shade100,
-                          ),
-                          GrayLiableColumBox(
-                            onPressed: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                barrierColor: Colors
-                                    .transparent, // Keeps the background transparent
-                                context: context,
-                                builder: (context) {
-                                  return Stack(
-                                    alignment: Alignment.bottomCenter,
-                                    children: [
-                                      // Blur effect
-                                      BackdropFilter(
-                                        filter: ImageFilter.blur(
-                                            sigmaX: 10, sigmaY: 10),
-                                        child: Container(
-                                          color: Colors.black.withOpacity(
-                                              0.3), // Adds a subtle overlay
-                                        ),
-                                      ),
-                                      // Bottom sheet content
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 20),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
-                                          ),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              blurRadius: 15,
-                                              offset: Offset(0, -4),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            const Text(
-                                              "Cancel Rockdean's Trip?",
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            BlackRoundButton(
-                                              color: Colors.white,
-                                              backgroundColor: Colors.red,
-                                              title: "Yes, Cancel",
-                                              onPressed: () {
-                                                context
-                                                    .push(CancelReasonScreen());
-                                              },
-                                            ),
-                                            const SizedBox(height: 10),
-                                            RoundButton(
-                                              title: "No",
-                                              onPressed: () {
-                                                Navigator.pop(
-                                                    context); // Close the bottom sheet
-                                              },
-                                            ),
-                                            const SizedBox(height: 10),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            icon:
-                                Icon(Icons.cancel, color: Colors.red.shade600),
-                            title: "Cancel",
-                            backgroundColor: Colors.red.shade100,
-                          ),
-                        ],
-                      ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: 350, // Adjust the width for the button
-                                child: SwipeButton(
-                                  activeTrackColor: Colors.black,
-                                  activeThumbColor: AppColors.accentColor,
-                                  thumbPadding: EdgeInsets.all(3),
-                                  thumb: Icon(
-                                    Icons.chevron_right,
-                                    color: Colors.black,
-                                  ),
-                                  elevationThumb: 2,
-                                  elevationTrack: 2,
-                                  child: Text(
-                                    _getButtonLabel().toUpperCase(),
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize:
-                                          16, // Adjust font size for better visibility
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    overflow: TextOverflow
-                                        .ellipsis, // Handle text overflow
-                                  ),
-                                  onSwipe: () async {
-                                    setState(() {
-                                      _handleSwipeAction();
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    isOpen = !isOpen;
-                  });
-                },
-                icon: Image.asset(
-                  isOpen
-                      ? 'assets/images/arrow-up.png'
-                      : 'assets/images/arrow-down.png',
-                  width: 20,
-                  height: 20,
-                ),
-              ),
-              Positioned(
-                top: -20,
-                left: 0,
-                right: 0,
-                child: _buildHeaderRow(),
-              ),
-            ],
+  Widget _buildRideStatusContainer(
+      double screenWidth, double screenHeight, String statusText) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.02,
+        vertical: screenHeight * 0.02,
+      ),
+      padding: EdgeInsets.all(screenWidth * 0.03),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(50),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+            offset: Offset(0, -2),
           ),
         ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TimerCountdown(
+            spacerWidth: 0,
+            daysDescription: "",
+            hoursDescription: "",
+            minutesDescription: "",
+            secondsDescription: "",
+            format: CountDownTimerFormat.minutesSeconds,
+            enableDescriptions: false,
+            timeTextStyle: TextStyle(
+              fontFeatures: <FontFeature>[FontFeature.tabularFigures()],
+              fontSize: screenWidth * 0.05,
+              color: Colors.red,
+              fontWeight: FontWeight.w800,
+            ),
+            colonsTextStyle: TextStyle(
+              fontSize: screenWidth * 0.05,
+              color: Colors.black,
+            ),
+            descriptionTextStyle: TextStyle(
+              fontSize: screenWidth * 0.04,
+              color: Colors.grey,
+            ),
+            endTime: DateTime.now().add(Duration(minutes: 4)),
+          ),
+          SizedBox(height: screenHeight * 0.005),
+          Text(
+            statusText,
+            style: TextStyle(
+              fontSize: screenWidth * 0.03,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOptionsRow(double screenWidth, double screenHeight) {
+    return
+      Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GrayLiableColumBox(
+          onPressed: () {},
+          icon: Icon(Icons.chat_bubble, color: Colors.green.shade600),
+          title: "Chat",
+          backgroundColor: Colors.green.shade100,
+        ),
+        GrayLiableColumBox(
+          onPressed: () {},
+          icon: Icon(Icons.chat_outlined, color: Colors.blue.shade700),
+          title: "Message",
+          backgroundColor: Colors.blue.shade100,
+        ),
+        GrayLiableColumBox(
+          onPressed: () async {
+            await showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              barrierColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return CancelReasonScreen();
+              },
+            );
+          },
+          icon: Icon(Icons.cancel, color: Colors.red.shade600),
+          title: "Cancel",
+          backgroundColor: Colors.red.shade100,
+        ),
+      ],
+    );
+  }
+
+
+  Widget _buildBottomDetails() {
+    if (!isComleteRide) {
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          final screenWidth = constraints.maxWidth;
+          final screenHeight = constraints.maxHeight;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              if (rideStatus == 1)
+                _buildRideStatusContainer(
+                  screenWidth,
+                  screenHeight,
+                  "Waiting For Rider",
+                ),
+              if (rideStatus == 2)
+                _buildRideStatusContainer(
+                  screenWidth,
+                  screenHeight,
+                  "Waiting for a ride",
+                ),
+              if (rideStatus == 3)
+                _buildRideStatusContainer(
+                  screenWidth,
+                  screenHeight,
+                  "Arrived at drop off",
+                ),
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.05,
+                      vertical: screenHeight * 0.01,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          offset: Offset(0, -2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: screenHeight * 0.03),
+                        _buildGrayLiableRow(),
+                        SizedBox(height: screenHeight * 0.02),
+                        if (isOpen) _buildOptionsRow(screenWidth, screenHeight),
+                        SizedBox(height: screenHeight * 0.01),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: screenWidth * 0.9,
+                              child: SwipeButton(
+                                activeTrackColor: Colors.black,
+                                activeThumbColor: AppColors.accentColor,
+                                thumbPadding: EdgeInsets.all(3),
+                                thumb: Icon(
+                                  Icons.chevron_right,
+                                  color: Colors.black,
+                                ),
+                                elevationThumb: 2,
+                                elevationTrack: 2,
+                                child: Text(
+                                  _getButtonLabel().toUpperCase(),
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                onSwipe: () async {
+                                  setState(() {
+                                    _handleSwipeAction();
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isOpen = !isOpen;
+                      });
+                    },
+                    icon: Image.asset(
+                      isOpen
+                          ? 'assets/images/arrow-up.png'
+                          : 'assets/images/arrow-down.png',
+                      width: screenWidth * 0.05,
+                      height: screenHeight * 0.05,
+                    ),
+                  ),
+                  Positioned(
+                    top: -screenHeight * 0.03,
+                    left: 0,
+                    right: 0,
+                    child: _buildHeaderRow(),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
       );
     } else {
       return Column(
@@ -571,7 +421,7 @@ class _RunRideScreenState extends State<RunRideScreen> with OSMMixinObserver {
             children: [
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
@@ -599,7 +449,7 @@ class _RunRideScreenState extends State<RunRideScreen> with OSMMixinObserver {
                     Text(
                       "Vipul Tarur",
                       style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
                     ),
                     const SizedBox(height: 10),
                     Container(
@@ -610,7 +460,8 @@ class _RunRideScreenState extends State<RunRideScreen> with OSMMixinObserver {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: RatingBar.builder(
+                        child:
+                        RatingBar.builder(
                           initialRating: 0,
                           minRating: 1,
                           direction: Axis.horizontal,

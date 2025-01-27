@@ -20,7 +20,7 @@ class GrayLiableColumBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
@@ -28,7 +28,6 @@ class GrayLiableColumBox extends StatelessWidget {
         child: Column(
           children: [
             IconButton(onPressed: onPressed, icon: icon),
-            const SizedBox(height: 4),
             Text(
               title,
               style: textStyle ??

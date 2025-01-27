@@ -78,117 +78,131 @@ class _TripRequestScreenState extends State<TripRequestScreen>
   }
 
   Widget _buildBottomDetails() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Stack(
-          clipBehavior: Clip.none,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final screenHeight = constraints.maxHeight;
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset(0, -2),
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.05, // Dynamic horizontal padding
+                    vertical: screenHeight * 0.015, // Dynamic vertical padding
                   ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 30), // Space for the header row
-                  _buildGrayLiableRow(),
-                  const SizedBox(height: 10),
-                  _buildPickupPointDetails(),
-                  const SizedBox(
-                    height: 10,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10,
+                        offset: Offset(0, -2),
+                      ),
+                    ],
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: screenHeight * 0.03), // Space for header row
+                      _buildGrayLiableRow(),
+                      SizedBox(height: screenHeight * 0.02),
+                      _buildPickupPointDetails(),
+                      SizedBox(height: screenHeight * 0.02),
+                      Container(
+                        child: Column(
                           children: [
-                            // Wrap each SwipeButton with a SizedBox for width constraint
-                            SizedBox(
-                              width: 170, // Adjust the width for the button
-                              child: SwipeButton(
-                                activeTrackColor: Colors.black,
-                                activeThumbColor: AppColors.accentColor,
-                                thumbPadding: EdgeInsets.all(3),
-                                thumb: Icon(
-                                  Icons.chevron_right,
-                                  color: Colors.black,
-                                ),
-                                elevationThumb: 2,
-                                elevationTrack: 2,
-                                child: Text(
-                                  "Cancel".toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize:
-                                        16, // Adjust font size for better visibility
-                                    fontWeight: FontWeight.bold,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // Responsive SwipeButton 1
+                                SizedBox(
+                                  width: screenWidth * 0.4, // Adjust to 40% width
+                                  child: SwipeButton(
+                                    activeTrackColor: Colors.black,
+                                    activeThumbColor: AppColors.accentColor,
+                                    thumbPadding: EdgeInsets.all(
+                                      screenWidth * 0.01,
+                                    ), // Responsive thumb padding
+                                    thumb: Icon(
+                                      Icons.chevron_right,
+                                      color: Colors.black,
+                                      size: screenWidth * 0.05, // Responsive icon
+                                    ),
+                                    elevationThumb: 2,
+                                    elevationTrack: 2,
+                                    child: Text(
+                                      "Cancel".toUpperCase(),
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: screenWidth * 0.04, // Font size
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    onSwipe: () {
+                                      context.pop();
+                                    },
                                   ),
-                                  overflow: TextOverflow
-                                      .ellipsis, // Handle text overflow
                                 ),
-                                onSwipe: () {
-                                  context.pop();
-                                },
-                              ),
+                                // Responsive SwipeButton 2
+                                SizedBox(
+                                  width: screenWidth * 0.4,
+                                  child: SwipeButton(
+                                    activeTrackColor: Colors.black,
+                                    activeThumbColor: AppColors.accentColor,
+                                    thumbPadding: EdgeInsets.all(
+                                      screenWidth * 0.01,
+                                    ), // Responsive thumb padding
+                                    thumb: Icon(
+                                      Icons.chevron_right,
+                                      color: Colors.black,
+                                      size: screenWidth * 0.05, // Responsive icon
+                                    ),
+                                    elevationThumb: 2,
+                                    elevationTrack: 2,
+                                    child: Text(
+                                      "Accept".toUpperCase(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: screenWidth * 0.04, // Font size
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    onSwipe: () {
+                                      context.push(const RunRideScreen());
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 170, // Define a fixed width
-                              child: SwipeButton(
-                                activeTrackColor: Colors.black,
-                                activeThumbColor: AppColors.accentColor,
-                                thumbPadding: EdgeInsets.all(3),
-                                thumb: Icon(
-                                  Icons.chevron_right,
-                                  color: Colors.black,
-                                ),
-                                elevationThumb: 2,
-                                elevationTrack: 2,
-                                child: Text(
-                                  "Accept".toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                onSwipe: () {
-                                    context.push(const RunRideScreen());
-                                },
-                              ),
-                            )
                           ],
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              top: -20,
-              left: 0,
-              right: 0,
-              child: _buildHeaderRow(),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: -screenHeight * 0.03, // Responsive positioning
+                  left: 0,
+                  right: 0,
+                  child: _buildHeaderRow(),
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
+
 
   Widget _buildTopActionButton() {
     return SafeArea(
@@ -315,7 +329,8 @@ class _TripRequestScreenState extends State<TripRequestScreen>
                 width: 2,
               ),
             ),
-            child: Row(
+            child:
+            Row(
               children: [
                 Column(
                   children: [
@@ -371,7 +386,7 @@ class _TripRequestScreenState extends State<TripRequestScreen>
             ),
             const SizedBox(height: 18),
             Container(
-              width: 270,
+              width: context.width*0.6,
               height: 2,
               color: AppColors.mapLineColor2,
             ),

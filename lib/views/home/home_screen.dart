@@ -1,5 +1,6 @@
 import 'package:farego/commen/app_colors.dart';
 import 'package:farego/views/home/trip_request_screen.dart';
+import 'package:farego/views/menu/menu_screen.dart';
 import 'package:farego/widget/icons_title_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
@@ -297,26 +298,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Stack(
                         alignment: Alignment.bottomLeft,
                         children: [
-                          Container(
-                            margin:const EdgeInsets.only(left: 15),
-                            padding: const EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 10),
+                          InkWell(
+                            onTap: () {
+                              context.push(MenuScreen());
+                            },
+                            child: Container(
+                              margin:const EdgeInsets.only(left: 15),
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 10),
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  "assets/images/dog.png",
+                                  width: 40,
+                                  height: 40,
                                 ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                "assets/images/dog.png",
-                                width: 40,
-                                height: 40,
                               ),
                             ),
                           ),

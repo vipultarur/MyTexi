@@ -22,7 +22,8 @@ class GrayLiableBox extends StatelessWidget {
     return
       InkWell(
         onTap: (){},
-        child: Container(
+        child:
+        Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: backgroundColor,
