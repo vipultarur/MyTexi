@@ -1,4 +1,5 @@
 import 'package:farego/commen/app_colors.dart';
+import 'package:farego/views/menu/earning_screen.dart';
 import 'package:farego/views/menu/service_type_screen.dart';
 import 'package:farego/widget/gray_liable_colum_box.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,9 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GrayLiableColumBox(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(EarningScreen());
+                },
                 icon: Icon(Icons.bar_chart_outlined, color: Colors.green.shade600),
                 title: "Earnings",
                 backgroundColor: Colors.green.shade100,

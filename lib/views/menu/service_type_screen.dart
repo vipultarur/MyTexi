@@ -1,3 +1,4 @@
+import 'package:farego/commen/app_colors.dart';
 import 'package:farego/widget/switch_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _ServiceTypeScreenState extends State<ServiceTypeScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            // Add navigation logic here if needed
+            context.pop();
           },
         ),
         title: const Text(

@@ -43,6 +43,7 @@ dependencies:
   flutter_swipe_button: ^2.1.1+1
   flutter_timer_countdown: ^1.0.7
   flutter_rating_bar: ^4.0.1
+  fl_chart: ^0.70.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
