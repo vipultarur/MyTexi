@@ -1,6 +1,10 @@
 import 'package:farego/commen/app_colors.dart';
+import 'package:farego/views/home/home_screen.dart';
 import 'package:farego/views/menu/earning_screen.dart';
 import 'package:farego/views/menu/service_type_screen.dart';
+import 'package:farego/views/menu/settings_screen.dart';
+import 'package:farego/views/menu/summary_screen.dart';
+import 'package:farego/views/menu/wallet_screen.dart';
 import 'package:farego/widget/gray_liable_colum_box.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +36,9 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            context.pop();
+          },
         ),
         title: const Text(
           'Profile',
@@ -96,7 +102,9 @@ class ProfileScreen extends StatelessWidget {
                 backgroundColor: Colors.green.shade100,
               ),
               GrayLiableColumBox(
-                onPressed: () {},
+              onPressed: (){
+              context.push(WalletView());
+              },
                 icon: Icon(Icons.account_balance_wallet, color: Colors.blue.shade700),
                 title: "Wallet",
                 backgroundColor: Colors.blue.shade100,
@@ -140,7 +148,7 @@ class ProfileScreen extends StatelessWidget {
           // List of menu items
           Expanded(
             child: ListView(
-              children: const [
+              children: [
                 // ProfileMenuItem(
                 //   icon: Icons.person,
                 //   title: "Your profile",
@@ -148,18 +156,44 @@ class ProfileScreen extends StatelessWidget {
                 ProfileMenuItem(
                   icon: Icons.home_rounded,
                   title: "Home",
+                  onPressed: (){
+                    context.push(HomeScreen());
+                  },
                 ),
-                ProfileMenuItem(
+                 ProfileMenuItem(
+                  icon: Icons.summarize,
+                  title: "Summery",
+                  onPressed: (){
+                    context.push(SummaryScreen());
+                  },
+                ),
+                 ProfileMenuItem(
+                  icon: Icons.subscriptions_sharp,
+                  title: "My Subscription",
+                   onPressed: (){
+                     context.push(HomeScreen());
+                   },
+                ),
+                 ProfileMenuItem(
                   icon: Icons.notifications,
                   title: "Notification",
+                   onPressed: (){
+                     context.push(HomeScreen());
+                   },
                 ),
-                ProfileMenuItem(
+                 ProfileMenuItem(
                   icon: Icons.settings,
                   title: "Settings",
+                   onPressed: (){
+                     context.push(SettingsScreen());
+                   },
                 ),
-                ProfileMenuItem(
+                 ProfileMenuItem(
                   icon: Icons.logout,
                   title: "Logout",
+                   onPressed: (){
+                     context.push(HomeScreen());
+                   },
                 ),
               ],
             ),
@@ -172,13 +206,17 @@ class ProfileScreen extends StatelessWidget {
 
 }
 
+
 class ProfileMenuItem extends StatelessWidget {
   final IconData icon;
   final String title;
+  final VoidCallback onPressed; // Fixed the missing parameter type
 
   const ProfileMenuItem({
     required this.icon,
     required this.title,
+    required this.onPressed, // Included in the constructor
+    super.key,
   });
 
   @override
@@ -186,7 +224,8 @@ class ProfileMenuItem extends StatelessWidget {
     return ListTile(
       leading: Icon(icon, color: Colors.black),
       title: Text(title, style: const TextStyle(fontSize: 16)),
-      onTap: () {},
+      onTap: onPressed, // Corrected the reference
     );
   }
 }
+
